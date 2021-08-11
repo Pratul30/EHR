@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Patient's Name</th>
+            <th scope="col">Patient's Id</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for patient in patient %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{patient.owner.patient_name}}</td>
+            <td>{{patient.patient_id}}</td>
+            <td><button class='btn btn-primary text-white'><a href='/patientid/{{patient.patient_id}}' class='text-white text-decoration-none'>Examine</a></button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

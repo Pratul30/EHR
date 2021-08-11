@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+      <div class="container-fluid" style='height:100vh'>
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                Bootstrap
+              </a>
+            </div>
+          </nav>   
+          <div class='d-flex flex-column bd-highlight align-items-center mt-2'>
+            <div style='font-size:35px;'>
+              Existing Patient
+            </div>
+            <div style='font-size:35px'>
+              Enter The Patient Id Correctly
+            </div>
+          </div>
+        <div class="row flex-lg-row-reverse align-items-center py-2">
+            <div class='d-flex mb-auto' style='width:50%'>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Patient's Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Father's Name</th>
+                    <th scope="col">Village Name</th>
+                    <th scope="col">Contact Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for patientresult in patientresult %}
+                  <tr>
+                    <th>{{patientresult.patient_id}}</th>
+                    <td>{{patientresult.patient_name}}</td>
+                    <td>{{patientresult.father_name}}</td>
+                    <td>{{patientresult.village_name}}</td>
+                    <td>{{patientresult.patient_contact}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5" >
+              {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class='alert alert-{{category}} alert-dismissible fade show'>
+                  {{message}}
+                  <button type='button' class='btn-close' data-bs-dismiss='alert' aria-lable='Close'></button>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+              <form class="p-4 p-md-5 border rounded-3 bg-light" action='' method='POST'>
+                  {{form.hidden_tag()}}
+                  <div class='form-floating mb-3'>
+                    {% if form.patient_name.errors %}
+                    {{form.patient_name(class='form-control form-control-lg is-invalid')}}
+                      <div class='invalid-feedback'>
+                        {% for error in form.patient_name.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                     {{form.patient_name(class='form-control')}}
+                     {{form.patient_name.label(for='patient_name')}}
+                  {% endif %}
+                </div>
+                  <div class='form-floating mb-3'>
+                    {% if form.patient_age.errors %}
+                    {{form.patient_age(class='form-control form-control-lg is-invalid')}}
+                      <div class='invalid-feedback'>
+                        {% for error in form.patient_age.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                     {{form.patient_age(class='form-control')}}
+                     {{form.patient_age.label(for='patient_age')}}
+                  {% endif %}
+                  </div>
+                  <div class="form-floating mb-3">
+                    {% if form.father_name.errors %}
+                    {{form.father_name(class='form-control form-control-lg is-invalid')}}
+                      <div class='invalid-feedback'>
+                        {% for error in form.father_name.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                     {{form.father_name(class='form-control')}}
+                     {{form.father_name.label(for='father_name')}}
+                  {% endif %}
+                  </div>
+                  <div class='form-floating mb-3'>
+                    {% if form.village_name.errors %}
+                    {{form.village_name(class='form-control form-control-lg is-invalid')}}
+                      <div class='invalid-feedback'>
+                        {% for error in form.village_name.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                     {{form.village_name(class='form-control')}}
+                     {{form.village_name.label(for='village_name')}}
+                  {% endif %}
+                  </div>
+                  <div class='form-floating mb-3'>
+                    {% if form.patient_contact.errors %}
+                    {{form.patient_contact(class='form-control form-control-lg is-invalid')}}
+                      <div class='invalid-feedback'>
+                        {% for error in form.village_name.errors %}
+                        <span>{{error}}</span>
+                        {% endfor %}
+                      </div>
+                  {% else %}
+                     {{form.patient_contact(class='form-control')}}
+                     {{form.patient_contact.label(for='patient_contact')}}
+                  {% endif %}
+                  </div>
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+                </form>
+              </div>
+          </div>
+      </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
